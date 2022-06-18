@@ -8,8 +8,12 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 contract OwnableERC1155 is ERC1155, Ownable {
     string private greeting;
 
-    constructor(address _owner, string memory _baseURI) ERC1155(_baseURI) {
+    constructor(address _owner) ERC1155("") {
         transferOwnership(_owner);
+    }
+
+    function setURI(string memory _uri) public onlyOwner {
+        _setURI(_uri);
     }
 
     function mint( address to, uint256 id) public onlyOwner {
